@@ -1,0 +1,241 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+
+    {% if title %}
+        <title>Django blog-{{ title }}</title>
+    {% else %}
+        <title>Django blog</title>
+    {% endif %}
+</head>
+<body>
+        <header class="site-header">
+          <nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
+            <div class="container">
+              <a class="navbar-brand mr-4" href="{% url 'blog-home' %}"><img src="https://www.cbit.ac.in/wp-content/themes/CBIT/images/logo.png"
+                alt='Staff Leave Applications'  height='120'
+               >
+                
+              </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+                    
+                    
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                  {% if user %}
+                  <a class="nav-item nav-link" href="{% url 'about1' %}">About</a>
+                  <a class="nav-item nav-link" href="{% url 'table1' %}">Leave Applications</a>
+                  <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                  <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                  {% else %}
+                    <a class="nav-item nav-link" href="{% url 'login' %}">HOD Login</a>
+                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                  {% endif %}
+                </div>
+                </div>
+            </div>
+            </nav>
+        </header>
+      <br>
+      <br>
+      <br>
+        <main role="main" class="container">
+            <div class="row">
+              <div class="col-md-8">
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" >
+                        {{ message }}
+                    </div>
+                  {% endfor %}
+                  
+               {% endif %}
+              
+               {% load crispy_forms_tags %}
+               {% block content %}
+               <br><br><br>
+                   <h3 class="heading">Employee Details</h3>
+                   <form>
+                       <div class="form-group"> 
+                         <label for="checkhistory">Emp id</label>
+                         <input type="text" class="form-control" name="checkhistory" id='checkhistory' aria-describedby="Help" placeholder="Enter employee id">
+                         <small id="Help" class="form-text text-muted">Enter id to see the respective employee profile.</small>
+                       </div>
+                       <button onclick="myFunction()"
+                        type="submit" class="btn btn-primary">Submit</button>
+                   </form>
+                   
+                   <table class="table table-bordered ">
+                       <thead class="thead-light">
+                         <tr> 
+                           <th scope="col" class="tablehead">EMP_ID	</th>
+                           <th scope="col" class="tablehead">LEAVE_ID</th>
+                           <th scope="col" class="tablehead">EMP_NAME</th>
+                           
+                           <th scope="col" class="tablehead">DEPTNO</th>
+                           <th scope="col" class="tablehead">DESG</th>
+                           <th scope="col" class="tablehead">EMAIL</th>
+                           <th scope="col" class="tablehead">CONTACT</th>
+                           <th scope="col" class="tablehead">ADDRESS</th>
+                           <th scope="col" class="tablehead">NO_OF_LEAVES_LEFT</th>
+                         </tr>
+                       </thead>
+                       <tbody>
+                         <tr>
+                           {% for i in values %}
+                           <th scope="row">{{i.EMPID}}</th>
+                           <th scope="row">{%if leave_id%}{{leave_id}}{% endif %}</th>
+                           <td>{{i.EMPNAME}}</td>
+                           <td>{{i.DEPTNO}}</td>
+                           <td>{{i.DESG}}</td>
+                           <td>{{i.EMAIL}}</td>
+                           <td>{{i.CONTACT}}</td>
+                           <td>{{i.ADDRESS}}</td>
+                           <td>{{i.NOLEAVES}}</td>
+                           {% endfor %}
+                         </tr>
+                         </tbody>
+                         </table>
+                         <h3 class="heading">Leave Details</h3>
+                   <form>
+                       <div class="form-group"> 
+                         <label for="checkhistory1">Leave id</label>
+                         <input type="text" class="form-control" name="checkhistory1" id='checkhistory1' aria-describedby="Help" placeholder="Enter Leave id">
+                         <small id="Help" class="form-text text-muted">Enter Leave id to see the Leave details of that employee.</small>
+                       </div>
+                       <button onclick="myFunction1()"
+                        type="submit" class="btn btn-primary">Submit</button>
+                   </form>
+                   <table class="table table-bordered">
+                    <thead class="thead-light">
+                      <tr>
+        
+                        <th scope="col" class="tablehead">EMP_ID	</th>
+                        <th scope="col" class="tablehead">LEAVE_ID</th>
+                        <th scope="col" class="tablehead">LEAVE TITLE</th>
+                        <th scope="col" class="tablehead">START_DATE</th>
+                        <th scope="col" class="tablehead">END__DATE</th>
+                        <th scope="col" class="tablehead">NO OF DAYS</th>
+                        <th scope="col" class="tablehead">REASON</th>
+                        <th scope="col" class="tablehead">EMG_LEAVE</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        {% for i in values1 %}
+                        <tr>
+                        <th scope="row">{{i.EMPID}}</th>
+                        <td>{{i.LEAVE_ID}}</td>
+                        <td>{{i.LEAVETITLE}}</td>
+                        <td>{{i.STDATE}}</td>
+                        <td>{{i.ENDDATE}}</td>
+                        <td>{{i.NOOFDAYS}}</td>
+                        <td>{{i.REASON}}</td>
+                        <td>{{i.EMGLEAVE}}</td>
+                        
+                      </tr>
+                        {% endfor %}
+                      </tr>
+                      </tbody>
+                      </table>
+                    
+                    <button type="button" class="btn"><a href="home3?LEAVE_MSG=rejected&LEAVE_ID={{leave_id}}&LEAVE_STAT=0">REJECT</a></button>
+                    <button type="button" class="btn"><a href="home3?LEAVE_MSG=accepted&LEAVE_ID={{leave_id}}&LEAVE_STAT=1">ACCEPT</a></button>
+                    <button type="button" class="btn"><a href="home3?LEAVE_MSG=come to cabin&LEAVE_ID={{leave_id}}&LEAVE_STAT=2">COME TO THE CABIN</a></button>
+                      <br>
+                      <h3 class="tablehead">Leaves left</h3>
+                   <form action='hi'>
+                     
+                       <div class="form-group"> 
+                         <label for="checkhistory">Edit leaves</label>
+                         <input type="text" class="form-control" name="checkhistory2" id='checkhistory2' aria-describedby="Help" placeholder="Enter employee id">
+                         <input type="text" class="form-control" name="checkhistory3" id='checkhistory3' aria-describedby="Help" placeholder="NO.OF LEAVES">
+                         <small id="Help" class="form-text text-muted">Click below to edit number of leaves of employee</small>
+                       </div>
+                       <button
+                        type="submit" class="btn btn-primary">EDIT</button>
+                   </form>
+                         
+               
+               
+                          <br>
+                          
+                           <h2 class="tablehead"> Click below to check Attendance of employee</h2> 
+                          
+               
+                         
+               <form action="{% url 'calendar1' %}">
+                 <button type="submit" class="btn btn-secondary">Attendance</button>
+                </form>
+                <form>
+                  <div class="form-group"> 
+                    <label for="approval" class="tablehead"><h3>Modify Leave status Here</h3></label>
+                    <input type="text" class="form-control" name="approval" id='approval' aria-describedby="Help" placeholder="Enter Leave id">
+                    <small id="Help" class="form-text text-muted">Enter Leave id to modify the Leave status of that employee.</small>
+                    <input type="text" class="form-control" name="modify" id='modify' aria-describedby="Help" placeholder="Enter Leave Message">
+                  </div>
+                  <button onclick="myFunction1()"
+                   type="submit" class="btn btn-primary">Submit</button>
+                   
+                  {%for i in info%}
+                   <h5>Leave id: {{i.LEAVE_ID}}</h5>
+                    <h5>Leave message: {{i.LEAVE_MSG}}</h5>
+                    <h5>Leave Status:{{i.LEAVE_STAT}}</h5>
+                   {%endfor%}
+                   
+                   
+                    
+              </form>
+
+              
+                        
+                         
+               {% endblock content %}
+                
+                  </div>
+                  </div>
+                  
+
+          </main>
+          
+   
+    
+
+     <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<script>
+function myFunction() {
+  x=document.getElementById("myText").value ;
+}
+console.log(x);
+</script>
+
+
+
+
+
+ 	

@@ -1,0 +1,167 @@
+body {
+    
+  background: #ffffff;
+  margin-top: 5rem;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+ul {
+  margin: 1;
+}
+.navbar-brand{
+  min-height: 55px;
+  padding: 0px 15px 5px;
+}
+
+.bg-steel {
+  background-color: #8bccf7;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #000405fb;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #a31717;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+  font-size: 100px;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+
+
+
+
+.fa {
+padding: 20px;
+font-size: 30px;
+width: 50px;
+text-align: center;
+text-decoration: none;
+margin: 5px 2px;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook {
+background: #3B5998;
+color: white;
+}
+
+.fa-twitter {
+background: #55ACEE;
+color: white;
+}
+
+.fa-google {
+background: #dd4b39;
+color: white;
+}
+
+.fa-linkedin {
+background: #007bb5;
+color: white;
+}
+
+.fa-youtube {
+background: #bb0000;
+color: white;
+}
+.fa-instagram {
+background: #125688;
+color: white;
+}
+
+footer{
+width: 100%;
+background-color: #f6f7f3;
+padding: 5% 5% 10% 5%;
+color: #FFF;
+}
+.cs-hdg{
+font-family: 'Times New Roman', Times, serif ;
+font-size:x-large;
+color: #dd4b39;
+
+}
+
+.curr-stu-col{
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+font-weight: 500px;
+}
+.heading{
+color: rgba(10, 10, 3, 0.685);
+font-family: 'Times New Roman', Times, serif;
+}
+
+.tablehead{
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.profile{
+  color: #bb0000;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

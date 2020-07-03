@@ -1,0 +1,101 @@
+<html>
+<head>
+<script>
+
+    // Ignore this in your implementation
+    window.isMbscDemo = true;
+</script>
+
+<!-- Mobiscroll JS and CSS Includes -->
+<link rel="stylesheet" href="/static/css/mobiscroll.javascript.min.css">
+<script src="/static/js/mobiscroll.javascript.min.js"></script>
+
+<style type="text/css">
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+</style>
+
+</head>
+<body>
+<div mbsc-page class="demo-dots-colors-labels">
+<div style="height:100%">
+  <div mbsc-form>
+    <div class="mbsc-grid">
+        <div class="mbsc-row">
+            <div class="mbsc-col-sm-12 mbsc-col-md-4">
+                <div class="mbsc-form-group">
+                    <div id="demo-colored"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<ul style="display: none;">
+{%for i in abc%}
+ <li class="date">{{i.odate}}</li>
+{% endfor %}</ul>
+<ul style="display: none;">
+{%for i in abc%}
+ <li class="status">{{i.ostatus}}</li>
+{% endfor %}</ul>
+
+
+<script>
+
+mobiscroll.settings = {
+    lang: 'en',            // Specify language like: lang: 'pl' or omit setting to use default
+    theme: 'ios',          // Specify theme like: theme: 'ios' or omit setting to use default
+    themeVariant: 'light'  // More info about themeVariant: https://docs.mobiscroll.com/4-10-4/javascript/calendar#opt-themeVariant
+};
+var globaldata=[]
+var datevalue=document.getElementsByClassName("date")
+var statusid=document.getElementsByClassName("status")
+for(var i=0;i<datevalue.length;i++)
+{
+    let color='yellow'
+    if(statusid[i].innerText=="pending")
+    {
+        color="darkblue"
+    }
+    else if(statusid[i].innerText=="rejected")
+    {
+        color="red"
+    }
+    else if(statusid[i].innerText=="accepted")
+    {
+        color="green"
+    }
+    else if(statusid[i].innerText=="come to cabin")
+    {
+        color="orange"
+    }
+    globaldata.push({d:new Date(datevalue[i].innerText),background:color})
+} 
+var now = new Date();
+
+mobiscroll.form('#md-form');
+
+
+mobiscroll.calendar('#demo-colored', {
+    display: 'inline',     // Specify display mode like: display: 'bottom' or omit setting to use default
+    colors: [              // More info about colors: https://docs.mobiscroll.com/4-10-4/javascript/calendar#opt-colors
+        ...globaldata,
+
+    ]
+});
+
+
+</script>
+</script>
+</body>
+</html>

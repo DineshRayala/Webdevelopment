@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+
+    {% if title %}
+        <title>Django blog-{{ title }}</title>
+    {% else %}
+        <title>Django blog</title>
+    {% endif %}
+</head>
+<body>
+        <header class="site-header">
+            <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+            <div class="container">
+                <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Staff Leave Applications</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+                    
+                    
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                  {% if user %}
+                  <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+                  <a class="nav-item nav-link" href="{% url 'blog-table' %}">Leave Applications</a>
+                  <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                  <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                  {% else %}
+                    <a class="nav-item nav-link" href="{% url 'login' %}">HOD Login</a>
+                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                  {% endif %}
+                </div>
+                </div>
+            </div>
+            </nav>
+        </header>
+        <main role="main" class="container">
+            <div class="row">
+              <div class="col-md-8">
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" >
+                        {{ message }}
+                    </div>
+                  {% endfor %}
+               {% endif %}
+               {%block content%}
+<table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">EMP_ID	</th>
+        <th scope="col">LEAVE_ID</th>
+        <th scope="col">LEAVE TITLE</th>
+        <th scope="col">START_DATE</th>
+        <th scope="col">END__DATE</th>
+        <th scope="col">NO OF DAYS</th>
+        <th scope="col">LEAVES LEFT</th>
+        <th scope="col">REASON</th>
+        <th scope="col">EMG_LEAVE</th>
+        <th scope="col">Leave status</th>
+        <th scope="col">FEEDBACK</th>
+        <th scope="col">Click here to submit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in data %}
+      <tr>
+        <th scope="row">2</th>
+        <td>{{x.EMP_ID}}</td>
+        <td>{{x.LEAVE_ID}}</td>
+        <td>Long</td>
+        <td>20-08-2019</td>
+        <td>21-08-2019</td>
+        <td>2</td>
+        <td>3</td>
+        <td>Health issues</td>
+        <td>1</td>
+        <td>2</td>
+        <td>
+          <label for="select">Select</label>
+          <select name="status" id="status">
+          <option value="Grant">Grant</option>
+          <option value="Decline">Decline</option>
+          <option value="Come to cabin">Come to cabin</option>
+          </select>
+      </td>
+      <td><input type="submit" value="Submit"></td>
+
+      </tr>
+      {% endfor %}
+      <tr>
+        <th scope="row">2</th>
+        <td>12346</td>
+        <td>20190002</td>
+        <td>Short</td>
+        <td>25-08-2019</td>
+        <td>25-08-2019</td>
+        <td>1</td>
+        <td>9</td>
+        <td>Fever</td>
+        <td>1</td>
+        <td>1</td>
+        <td>
+          <label for="select">Select</label>
+          <select name="status" id="status">
+          <option value="Grant">Grant</option>
+          <option value="Decline">Decline</option>
+          <option value="Come to cabin">Come to cabin</option>
+          </select>
+      </td>
+      <td><input type="submit" value="Submit"></td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>12347</td>
+        <td>20190003</td>
+        <td>Long</td>
+        <td>22-08-2019</td>
+        <td>26-08-2019</td>
+        <td>5</td>
+        <td>5</td>
+        <td>Personal Work</td>
+        <td>0</td>
+        <td>0</td>
+          <td>
+            <label for="select">Select</label>
+            <select name="status" id="status">
+            <option value="Grant">Grant</option>
+            <option value="Decline">Decline</option>
+            <option value="Come to cabin">Come to cabin</option>
+            </select>
+        </td>
+        <td><input type="submit" value="Submit"></td>
+      </tr>
+    </tbody>
+  </table>
+  {% endblock content%}
+                
+                  </div>
+                  </div>
+
+          </main>
+          
+   
+    
+
+     <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
