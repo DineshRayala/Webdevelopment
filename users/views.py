@@ -219,3 +219,15 @@ def setleaves(request):
     #return render(request,'users/about1.html')
 def hi(request):
     return render(request,'users/cal.html')
+
+def password_reset(request):
+    if (request.method)=="POST":
+        HODNAME=request.POST['Username']
+        PASS =request.POST['pwd']
+        det = { "HODNAME":HODNAME,"PASS":PASS}
+        token = requests.post("https://cosc-team-14-restapi.herokuapp.com/updatepassword",det)
+       
+        to=token.json()
+        return render(request,'users/password_done.html')
+    return render(request,'users/reset.html')
+
